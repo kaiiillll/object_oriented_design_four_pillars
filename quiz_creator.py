@@ -76,3 +76,29 @@ class QuizCreator(BaseApp):
 
         messagebox.showinfo("Saved", "Question saved successfully!")
         self.clear_fields()
+        
+    def preview(self):
+        preview_text = f"Subject: {self.subject_var.get()}\n"
+        preview_text += f"Difficulty: {self.difficulty_var.get()}\n"
+        preview_text += f"Question: {self.question_entry.get('1.0', tk.END).strip()}\n"
+        preview_text += f"a) {self.option_a.get()}\n"
+        preview_text += f"b) {self.option_b.get()}\n"
+        preview_text += f"c) {self.option_c.get()}\n"
+        preview_text += f"d) {self.option_d.get()}\n"
+        preview_text += f"Correct: {self.correct_answer.get().lower()}"
+
+        messagebox.showinfo("Preview", preview_text)
+
+    def clear_fields(self):
+        self.question_entry.delete("1.0", tk.END)
+        self.subject_var.set("Math")
+        self.difficulty_var.set("Easy")
+        self.option_a.delete(0, tk.END)
+        self.option_b.delete(0, tk.END)
+        self.option_c.delete(0, tk.END)
+        self.option_d.delete(0, tk.END)
+        self.correct_answer.delete(0, tk.END)
+
+if __name__ == "__main__":
+    app = QuizCreator()
+    app.mainloop()
