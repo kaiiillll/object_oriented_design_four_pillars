@@ -43,3 +43,22 @@ class QuizCreator(BaseApp):
         tk.Button(self, text="Clear", command=self.clear_fields).pack(pady=5)
 
 # then proceed to copy all the remaining codes from my original 
+    def save_questions(self):
+        question = self.question_entry.get("1.0", tk.END).strip()
+        subject = self.subject_var.get()
+        difficulty = self.difficulty_var.get()
+        options = {
+            "a": self.option_a.get(),
+            "b": self.option_b.get(),
+            "c": self.option_c.get(),
+            "d": self.option_d.get()
+        }
+        correct = self.correct_answer.get().lower()
+
+        if not all([question, subject, difficulty, options["a"], options["b"], options["c"], options["d"], correct]):
+            messagebox.showerror("Error", "Please fill all fields!")
+            return
+
+        if correct not in ["a", "b", "c", "d"]:
+            messagebox.showerror("Error", "Correct answer must be a, b, c, or d!!")
+            return
