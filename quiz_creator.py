@@ -62,3 +62,17 @@ class QuizCreator(BaseApp):
         if correct not in ["a", "b", "c", "d"]:
             messagebox.showerror("Error", "Correct answer must be a, b, c, or d!!")
             return
+
+# saving the information into the txt file 
+        with open("created_questions.txt", "a") as file:
+            file.write(f"Subject: {subject}\n")
+            file.write(f"Difficulty: {difficulty}\n")
+            file.write(f"Question: {question}\n")
+            file.write(f"a) {options['a']}\n")
+            file.write(f"b) {options['b']}\n")
+            file.write(f"c) {options['c']}\n")
+            file.write(f"d) {options['d']}\n")
+            file.write(f"Correct: {correct}\n\n")
+
+        messagebox.showinfo("Saved", "Question saved successfully!")
+        self.clear_fields()
