@@ -15,3 +15,19 @@ class BrainRouletteApp(BaseApp):
 
         self.current_frame = None
         self.show_intro()
+        
+# registration and animation
+    def clear_frame(self):
+        if self.current_frame:
+            self.current_frame.destroy()
+            self.current_frame = None
+
+    def show_intro(self):
+        self.clear_frame()
+        self.current_frame = IntroAnimation(self, self.show_player_registration)
+        self.current_frame.pack(expand=True, fill="both")
+
+    def show_player_registration(self):
+        self.clear_frame()
+        self.current_frame = PlayerRegistration(self, self.start_main_menu)
+        self.current_frame.pack(expand=True, fill="both")
