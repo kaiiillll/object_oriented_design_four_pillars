@@ -53,4 +53,29 @@ class QuestionScreen(tk.Frame):
         tk.Label(self, text=f"Question from {category}").pack()
         tk.Button(self, text="Finish", command=lambda: on_complete({"score": 1})).pack()
 
+# def function for registations
+
+class BrainRouletteApp(BaseApp):
+    def __init__(self):
+        super().__init__("Brain Roulette Game", "800x600", "white")
+        self.players = []
+        self.category = None
+        self.question_manager = QuestionManager()
+        self.current_frame = None
+        self.show_intro()
+
+    def clear_frame(self):
+        if self.current_frame:
+            self.current_frame.destroy()
+            self.current_frame = None
+
+    def show_intro(self):
+        self.clear_frame()
+        self.current_frame = IntroAnimation(self, self.show_player_registration)
+        self.current_frame.pack(expand=True, fill="both")
+
+    def show_player_registration(self):
+        self.clear_frame()
+        self.current_frame = PlayerRegistration(self, self.start_main_menu)
+        self.current_frame.pack(expand=True, fill="both")
         
