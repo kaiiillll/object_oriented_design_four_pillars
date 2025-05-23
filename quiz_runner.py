@@ -79,3 +79,27 @@ class BrainRouletteApp(BaseApp):
         self.current_frame = PlayerRegistration(self, self.start_main_menu)
         self.current_frame.pack(expand=True, fill="both")
         
+    def start_main_menu(self, players):
+        self.players = players
+        self.clear_frame()
+        self.current_frame = MainMenu(self, self.players, self.start_wheel)
+        self.current_frame.pack(expand=True, fill="both")
+
+    def start_wheel(self, category):
+        self.category = category
+        self.clear_frame()
+        self.current_frame = Wheel(self, [category], self.start_question_screen)
+        self.current_frame.pack(expand=True, fill="both")
+
+    def start_question_screen(self, chosen_category):
+        self.category = chosen_category
+        self.clear_frame()
+        self.current_frame = QuestionScreen(self, self.players, self.category, self.question_manager, self.show_main_menu_after_game)
+        self.current_frame.pack(expand=True, fill="both")
+
+    def show_main_menu_after_game(self, scores):
+        self.start_main_menu(self.players)
+
+if __name__ == "__main__":
+    app = BrainRouletteApp()
+    app.mainloop()
